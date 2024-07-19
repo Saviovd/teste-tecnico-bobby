@@ -21,6 +21,13 @@ const routes = [
     path: "/users",
     name: "UserManagement",
     component: UserManagementView,
+    beforeEnter: (to, from, next) => {
+      if (isAuthenticated()) {
+        next();
+      } else {
+        next('/login');
+      }
+    }
   },
   {
     path: "/login",
