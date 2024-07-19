@@ -33,6 +33,13 @@ const routes = [
     path: "/login",
     name: "Login",
     component: LoginView,
+    beforeEnter: (to, from, next) => {
+      if (isAuthenticated()) {
+        next('/');
+      } else {
+        next();
+      }
+    }
   }
 ];
 

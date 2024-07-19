@@ -69,6 +69,7 @@ export default {
         });
         const token = response.data.token;
         setAuthToken(token);
+        this.$router.push('/');
       } catch (error) {
         console.error("Erro ao fazer login:", error);
       }
