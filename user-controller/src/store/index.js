@@ -18,8 +18,16 @@ const store = createStore({
             state.currentPage = page;
         },
         ADD_USER(state, user) {
-            console.log(user)
             state.users.push(user);
+        },
+        EDIT_USER(state, editedUser) {
+            const index = state.users.findIndex((user) => user.id === editedUser.id);
+            if (index !== -1) {
+                state.users.splice(index, 1, editedUser);
+            }
+        },
+        DELETE_USER(state, userId) {
+            state.users = state.users.filter((user) => user.id !== userId);
         },
     },
     actions: {

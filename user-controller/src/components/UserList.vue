@@ -3,11 +3,10 @@
     <h1>User List</h1>
     <ul>
       <li v-for="user in users" :key="user.id">
-        {{ user.first_name }} {{ user.last_name }} ({{ user.email }})
+        <UserCard :user="user" :key="user.id" />
       </li>
     </ul>
     <div>
-
       <button
         @click="fetchUsers(currentPage - 1)"
         :disabled="currentPage === 1"
@@ -35,8 +34,13 @@
 </template>
 
 <script>
+import UserCard from "./UserCard";
+
 export default {
   name: "UserList",
+  components: {
+    UserCard,
+  },
   computed: {
     users() {
       return this.$store.state.users;
@@ -68,7 +72,7 @@ export default {
   methods: {
     async fetchUsers(page = 1) {
       try {
-        await this.$store.dispatch("fetchUsers", page);
+        await this.$store.dispatch("fetchUsers", page, this.pagesToShow);
       } catch (error) {
         console.error("Failed to fetch users:", error);
       }

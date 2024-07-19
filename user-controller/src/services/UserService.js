@@ -22,4 +22,11 @@ export default {
   createUser(user) {
     return apiClient.post("/users", user);
   },
+  editUser(user) {
+    console.log(user.id)
+    return apiClient.put(`/users/${user.id}`, user);
+  },
+  deleteUser(userId) {
+    return apiClient.delete(`/users/${userId}`);
+  },
 };
