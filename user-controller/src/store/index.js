@@ -17,6 +17,10 @@ const store = createStore({
         SET_CURRENT_PAGE(state, page) {
             state.currentPage = page;
         },
+        ADD_USER(state, user) {
+            console.log(user)
+            state.users.push(user);
+        },
     },
     actions: {
         async fetchUsers({ commit }, page = 1) {
@@ -28,6 +32,34 @@ const store = createStore({
             } catch (error) {
                 console.error("Error fetching users:", error);
             }
+        },
+        addUser({ commit }, user) {
+            UserService.createUser(user)
+                .then((response) => {
+                    console.log("User added:", response.data);
+                    commit("ADD_USER", response.data);
+                })
+                .catch((error) => {
+                    console.error("Error adding user:", error);
+                });
+        },
+        editUser({ commit }, user) {
+            UserService.editUser(user)
+                .then((response) => {
+                    commit("EDIT_USER", response.data);
+                })
+                .catch((error) => {
+                    console.error("Error editing user:", error);
+                });
+        },
+        deleteUser({ commit }, userId) {
+            UserService.deleteUser(userId)
+                .then(() => {
+                    commit("DELETE_USER", userId);
+                })
+                .catch((error) => {
+                    console.error("Error deleting user:", error);
+                });
         },
     },
 });

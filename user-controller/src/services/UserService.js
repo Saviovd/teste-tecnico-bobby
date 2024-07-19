@@ -19,4 +19,7 @@ export default {
       throw error;
     }
   },
+  createUser(user) {
+    return apiClient.post("/users", user);
+  },
 };
