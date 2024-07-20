@@ -28,6 +28,7 @@
 import AuthService from "../services/AuthService";
 import { setAuthToken } from "../utils/auth.js";
 import { validateInput } from "../utils/validateForms.js";
+import UserService from "../services/UserService.js";
 
 export default {
   data() {
@@ -68,8 +69,10 @@ export default {
           password: this.password,
         });
         const token = response.data.token;
+        const user = await UserService.getUserByEmail(this.email);
+        localStorage.setItem('user', JSON.stringify(user))
         setAuthToken(token);
-        this.$router.push('/');
+        this.$router.push("/");
       } catch (error) {
         console.error("Erro ao fazer login:", error);
       }
