@@ -9,6 +9,7 @@
 import SideBar from "./components/SideBar";
 import { computed } from "vue";
 import { useRoute } from "vue-router";
+import './styles/tailwind.css'
 
 export default {
   name: "App",
@@ -26,18 +27,19 @@ export default {
 
 <style>
 .app {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding-left: 300px;
+  padding-left: 4rem;
+  padding-top: 2rem;
 }
-.app > .sidebar {
-  width: 250px;
-  position: fixed;
-  height: 100vh;
-  background: #f4f4f4;
+
+@media (min-width: 768px) {
+  .app {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-left: 22rem;
+  }
 }
 </style>
