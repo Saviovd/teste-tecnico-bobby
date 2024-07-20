@@ -1,92 +1,91 @@
 <template>
   <div>
     <h1>User List</h1>
+    <input
+      v-model="searchQuery"
+      type="text"
+      placeholder="Buscar por nome ou email"
+      @input="applyFilter"
+    />
+
     <ul>
-      <li v-for="user in users" :key="user.id">
+      <li v-for="user in paginatedUsers" :key="user.id">
         <UserCard :user="user" :key="user.id" />
       </li>
     </ul>
-    <div>
-      <button
-        @click="fetchUsers(currentPage - 1)"
-        :disabled="currentPage === 1"
-      >
-        Previous
-      </button>
 
-      <button
-        v-for="page in pagesToShow"
-        :key="page"
-        @click="fetchUsers(page)"
-        :class="{ active: page === currentPage }"
-      >
-        {{ page }}
-      </button>
-
-      <button
-        @click="fetchUsers(currentPage + 1)"
-        :disabled="currentPage >= totalPages"
-      >
-        Next
-      </button>
-    </div>
+    <Pagination
+      :totalPages="totalPages"
+      :currentPage="currentPage"
+      @change-page="changePage"
+    />
   </div>
 </template>
 
 <script>
 import UserCard from "./UserCard";
+import Pagination from "./ListPagination";
+import { applyFilter, sortUsers } from "../utils/search.js";
 
 export default {
   name: "UserList",
   components: {
     UserCard,
+    Pagination,
+  },
+  data() {
+    return {
+      searchQuery: "",
+      filteredUsers: [],
+      itemsPerPage: 6,
+    };
   },
   computed: {
     users() {
       return this.$store.state.users;
     },
     totalPages() {
-      return this.$store.state.totalPages;
+      return Math.ceil(this.filteredUsers.length / this.itemsPerPage);
     },
     currentPage() {
       return this.$store.state.currentPage;
     },
-    pagesToShow() {
-      const pages = [];
-      const maxPages = 5;
-
-      let startPage = Math.max(1, this.currentPage - Math.floor(maxPages / 2));
-      let endPage = Math.min(this.totalPages, startPage + maxPages - 1);
-
-      if (endPage - startPage < maxPages - 1) {
-        startPage = Math.max(1, endPage - maxPages + 1);
-      }
-
-      for (let i = startPage; i <= endPage; i++) {
-        pages.push(i);
-      }
-
-      return pages;
+    paginatedUsers() {
+      const start = (this.currentPage - 1) * this.itemsPerPage;
+      const end = start + this.itemsPerPage;
+      return this.filteredUsers.slice(start, end);
     },
   },
   methods: {
-    async fetchUsers(page = 1) {
+    async fetchUsers() {
       try {
-        await this.$store.dispatch("fetchUsers", page, this.pagesToShow);
+        await this.$store.dispatch("fetchUsers");
+        this.applyFilter();
       } catch (error) {
         console.error("Failed to fetch users:", error);
       }
     },
+
+    applyFilter() {
+      this.filteredUsers = sortUsers(
+        applyFilter(this.users, this.searchQuery),
+        this.searchQuery
+      );
+    },
+
+    changePage(page) {
+      this.$store.commit("SET_CURRENT_PAGE", page);
+    },
+  },
+  watch: {
+    users() {
+      this.applyFilter();
+    },
   },
   created() {
-    this.fetchUsers(this.currentPage);
+    this.fetchUsers();
   },
 };
 </script>
 
-<style>
-.active {
-  font-weight: bold;
-  text-decoration: underline;
-}
-</style>
+<style></style>

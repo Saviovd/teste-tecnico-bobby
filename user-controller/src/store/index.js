@@ -31,12 +31,22 @@ const store = createStore({
         },
     },
     actions: {
-        async fetchUsers({ commit }, page = 1) {
+        async fetchUsers({ commit }) {
+            let allUsers = [];
+            let totalPages = 0;
+
             try {
-                const response = await UserService.getUsers(page);
-                commit("SET_USERS", response.data.data);
-                commit("SET_TOTAL_PAGES", response.data.total_pages);
-                commit("SET_CURRENT_PAGE", page);
+                const firstResponse = await UserService.getUsers(1);
+                allUsers = firstResponse.data.data;
+                totalPages = firstResponse.data.total_pages;
+
+                for (let page = 2; page <= totalPages; page++) {
+                    const response = await UserService.getUsers(page);
+                    allUsers = allUsers.concat(response.data.data);
+                }
+
+                commit("SET_USERS", allUsers);
+                commit("SET_TOTAL_PAGES", totalPages);
             } catch (error) {
                 console.error("Error fetching users:", error);
             }
@@ -44,7 +54,6 @@ const store = createStore({
         addUser({ commit }, user) {
             UserService.createUser(user)
                 .then((response) => {
-                    console.log("User added:", response.data);
                     commit("ADD_USER", response.data);
                 })
                 .catch((error) => {
