@@ -1,28 +1,27 @@
 <template>
-  <div>
-    <h2>Criar Usuário</h2>
+  <div class="max-w-lg mx-auto p-6 bg-gray-800 rounded-lg shadow-lg">
+    <h2 class="text-2xl font-bold text-white mb-6">Criar Usuário</h2>
     <form @submit.prevent="submitForm" novalidate>
-      <div>
-        <label for="name">Nome:</label>
-        <input
-          type="text"
-          id="name"
-          v-model="user.name"
-          @blur="validateField('name', user.name)"
-        />
-        <p v-if="validationErrors.name">{{ validationErrors.name }}</p>
+      <div class="mb-4">
+        <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Nome:</label>
+        <input type="text" id="name" v-model="user.name" @blur="validateField('name', user.name)"
+          class="w-full p-2 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Digite o nome" />
+        <p v-if="validationErrors.name" class="text-red-500 text-sm mt-1">{{ validationErrors.name }}</p>
       </div>
-      <div>
-        <label for="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          v-model="user.email"
-          @blur="validateField('email', user.email)"
-        />
-        <p v-if="validationErrors.email">{{ validationErrors.email }}</p>
+
+      <div class="mb-4">
+        <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email:</label>
+        <input type="email" id="email" v-model="user.email" @blur="validateField('email', user.email)"
+          class="w-full p-2 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Digite o email" />
+        <p v-if="validationErrors.email" class="text-red-500 text-sm mt-1">{{ validationErrors.email }}</p>
       </div>
-      <button type="submit">Enviar</button>
+
+      <button type="submit"
+        class="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+        Enviar
+      </button>
     </form>
   </div>
 </template>
