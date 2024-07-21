@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import UserManagementView from "@/views/UserManagementView.vue";
 import { isAuthenticated } from "@/utils/auth";
 import LoginView from "@/views/LoginView.vue";
+import AboutView from "@/views/AboutView.vue";
 
 const routes = [
   {
@@ -21,6 +22,18 @@ const routes = [
     path: "/users",
     name: "UserManagement",
     component: UserManagementView,
+    beforeEnter: (to, from, next) => {
+      if (isAuthenticated()) {
+        next();
+      } else {
+        next('/login');
+      }
+    }
+  },
+  {
+    path: "/about",
+    name: "About",
+    component: AboutView,
     beforeEnter: (to, from, next) => {
       if (isAuthenticated()) {
         next();

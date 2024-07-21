@@ -58,7 +58,6 @@ export default {
 <style>
 @media (min-width: 768px) {
   .app {
-    height: 100vh;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
