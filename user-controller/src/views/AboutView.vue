@@ -1,6 +1,6 @@
 <template>
-    <div class="p-3 min-h-screen w-full text-white relative mt-20 sm:p-6" >
-        <h1 class="text-3xl font-bold mb-4">Sobre o Projeto</h1>
+    <div class="p-3 min-h-screen w-full text-white relative sm:p-6" >
+        <h1 class="text-3xl font-bold mb-4 mt-16">Sobre o Projeto</h1>
         <p class="mb-4">
             Este projeto é uma mini-aplicação desenvolvida para o controle de usuários, permitindo uma gestão eficiente
             das informações dos usuários com funcionalidades completas de CRUD (Criar, Ler, Atualizar, Excluir).

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-800 to-indigo-900 p-4">
+  <div class="flex items-center justify-center bg-gradient-to-r from-gray-800 to-indigo-900 p-4">
     <div class="bg-gray-900 p-8 rounded-lg shadow-lg w-full max-w-md">
       <h2 class="text-2xl font-bold mb-6 text-white">Login</h2>
       <form @submit.prevent="login" class="space-y-4">

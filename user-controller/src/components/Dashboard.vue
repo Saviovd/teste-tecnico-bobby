@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen w-full text-white relative">
+  <div class="w-full text-white relative">
 
     <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mt-6">
       <KpiCard title="Acessos" value="1,234" description="Total de acessos registrados no último mês." />
