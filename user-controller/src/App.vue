@@ -4,6 +4,13 @@
     <router-view :onclick="showNotifications === true ? toggleNotifications : ''" />
     <Notifications v-if="showNotifications && !isLoginPage" :notifications="notifications" />
     <NotificationButton v-if="!isLoginPage" @click="toggleNotifications" :count="notificationsCount" />
+    <footer class="fixed bottom-0 right-0 mb-4 mr-4 text-md text-gray-600 sm:text-lg">
+      <a href="https://savioalmeida.vercel.app/" target="_blank" rel="noopener noreferrer"
+        class="flex items-center gap-1">
+        <span>Dev by</span>
+        <span class="font-semibold text-blue-600">Saviovd</span>
+      </a>
+    </footer>
   </div>
 </template>
 
@@ -30,12 +37,12 @@ export default {
     const ShowSidebar = computed(() => route.name !== 'Login');
     const isLoginPage = computed(() => route.name === 'Login');
 
-    const { 
-      notifications, 
-      notificationsCount, 
-      showNotifications, 
-      toggleNotifications, 
-      generateNotifications 
+    const {
+      notifications,
+      notificationsCount,
+      showNotifications,
+      toggleNotifications,
+      generateNotifications
     } = useNotifications();
 
     onMounted(() => {
