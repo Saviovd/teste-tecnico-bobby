@@ -20,7 +20,7 @@ export function useNotifications() {
     }
 
     function generateRandomNotificationCount() {
-        return Math.floor(Math.random() * 5) + 1;
+        return Math.floor(Math.random() * 5);
     }
 
     function toggleNotifications() {

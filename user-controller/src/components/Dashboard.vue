@@ -1,6 +1,6 @@
 <template>
   <div class="p-6 min-h-screen w-full text-white relative">
-    <h2 class="text-2xl mb-4">Controle de Usuários</h2>
+    <h2 class="text-4xl mb-4 font-medium text-neutral-300">Metricas</h2>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mt-6">
       <KpiCard title="Acessos" value="1,234" description="Total de acessos registrados no último mês." />

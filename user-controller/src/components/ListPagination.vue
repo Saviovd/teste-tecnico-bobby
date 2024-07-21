@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div class="flex items-center justify-center space-x-2 mt-4">
     <button
       @click="$emit('change-page', currentPage - 1)"
       :disabled="currentPage === 1"
+      class="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:bg-gray-500 transition duration-300"
     >
       Previous
     </button>
@@ -11,7 +12,12 @@
       v-for="page in pagesToShow"
       :key="page"
       @click="$emit('change-page', page)"
-      :class="{ active: page === currentPage }"
+      :class="[
+        'px-4 py-2 rounded-lg text-white',
+        page === currentPage
+          ? 'bg-blue-600 font-semibold'
+          : 'bg-gray-700 hover:bg-gray-600'
+      ]"
     >
       {{ page }}
     </button>
@@ -19,6 +25,7 @@
     <button
       @click="$emit('change-page', currentPage + 1)"
       :disabled="currentPage >= totalPages"
+      class="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:bg-gray-500 transition duration-300"
     >
       Next
     </button>

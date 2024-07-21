@@ -1,39 +1,64 @@
 <template>
-  <div>
-    <h3 v-if="!isEditing">{{ user.first_name }} {{ user.last_name }}</h3>
+  <div class="bg-gray-800 p-4 rounded-lg shadow-lg flex items-center space-x-4">
+    <img class="w-24 h-24 rounded-full border-2 border-gray-700" :src="user.avatar" :alt="user.first_name">
 
-    <div v-if="isEditing">
-      <input
-        type="text"
-        v-model="editableUser.first_name"
-        placeholder="First Name"
-        @blur="validateField('first_name', editableUser.first_name)"
-      />
-      <span v-if="validationErrors.first_name">{{ validationErrors.first_name }}</span>
+    <div class="flex-1">
+      <h3 v-if="!isEditing" class="text-xl font-semibold text-white">{{ user.first_name }} {{ user.last_name }}</h3>
 
-      <input
-        type="text"
-        v-model="editableUser.last_name"
-        placeholder="Last Name"
-        @blur="validateField('last_name', editableUser.last_name)"
-      />
-      <span v-if="validationErrors.last_name">{{ validationErrors.last_name }}</span>
+      <div v-if="isEditing">
+        <input
+          type="text"
+          v-model="editableUser.first_name"
+          placeholder="First Name"
+          @blur="validateField('first_name', editableUser.first_name)"
+          class="w-full mb-2 p-2 border border-gray-600 rounded bg-gray-900 text-white placeholder-gray-400"
+        />
+        <span v-if="validationErrors.first_name" class="text-red-500 text-sm">{{ validationErrors.first_name }}</span>
 
-      <input
-        type="email"
-        v-model="editableUser.email"
-        placeholder="Email"
-        @blur="validateField('email', editableUser.email)"
-      />
-      <span v-if="validationErrors.email">{{ validationErrors.email }}</span>
+        <input
+          type="text"
+          v-model="editableUser.last_name"
+          placeholder="Last Name"
+          @blur="validateField('last_name', editableUser.last_name)"
+          class="w-full mb-2 p-2 border border-gray-600 rounded bg-gray-900 text-white placeholder-gray-400"
+        />
+        <span v-if="validationErrors.last_name" class="text-red-500 text-sm">{{ validationErrors.last_name }}</span>
+
+        <input
+          type="email"
+          v-model="editableUser.email"
+          placeholder="Email"
+          @blur="validateField('email', editableUser.email)"
+          class="w-full mb-2 p-2 border border-gray-600 rounded bg-gray-900 text-white placeholder-gray-400"
+        />
+        <span v-if="validationErrors.email" class="text-red-500 text-sm">{{ validationErrors.email }}</span>
+      </div>
+
+      <p v-if="!isEditing" class="text-gray-400">{{ user.email }}</p>
+
+      <div class="mt-4 flex space-x-2">
+        <button
+          @click="toggleEdit"
+          class="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700 transition duration-300"
+        >
+          {{ isEditing ? "Salvar" : "Editar" }}
+        </button>
+        <button
+          v-if="!isEditing"
+          @click="deleteUser"
+          class="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition duration-300"
+        >
+          Excluir
+        </button>
+        <button
+          v-else
+          @click="isEditing = false"
+          class="bg-gray-600 text-white py-2 px-4 rounded hover:bg-gray-700 transition duration-300"
+        >
+          Cancelar
+        </button>
+      </div>
     </div>
-
-    <p v-if="!isEditing">{{ user.email }}</p>
-
-    <button @click="toggleEdit">{{ isEditing ? "Salvar" : "Editar" }}</button>
-    <button v-if="!isEditing" @click="deleteUser">Excluir</button>
-    <button v-else @click="isEditing = false">Cancelar</button>
-  
   </div>
 </template>
 
