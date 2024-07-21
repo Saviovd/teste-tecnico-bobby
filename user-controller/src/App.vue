@@ -61,7 +61,7 @@ export default {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    padding-left: 21.5rem;
+    padding-left: 20rem;
   }
 }
 
