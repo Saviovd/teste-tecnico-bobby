@@ -89,7 +89,8 @@ button.relative {
   height: 100%;
   width: 100%;
   overflow: auto;
-  padding: 1rem;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 .overflow-container::-webkit-scrollbar {
