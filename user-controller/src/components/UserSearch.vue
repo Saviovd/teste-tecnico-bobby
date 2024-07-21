@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-center items-center max-w-96 relative w-2/4 sm:w-2/3 md:w-1/2 lg:w-1/3 ">
+    <div class="flex justify-center items-center w-full m-auto relative sm:m-0 sm:max-w-96 sm:w-2/3 md:w-1/2 lg:w-1/3 ">
         <input v-model="searchQuery" type="text" placeholder="Search for any user" @input="applyFilter"
             class="p-3 border border-gray-700 rounded bg-gray-800 text-white placeholder-gray-400 w-full h-10 sm:h-12 pr-10" />
         <svg class="w-6 h-6 fill-indigo-500 absolute right-3 top-1/2 transform -translate-y-1/2 border-l-2 border-indigo-500 pl-2"
