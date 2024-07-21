@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full bg-gray-700 p-4 rounded-sm shadow-lg">
+    <div class="w-full bg-gray-700 p-4 pb-0 rounded-sm shadow-lg">
         <h3 class="text-xl mb-2 text-indigo-500">Distribuição por Idade</h3>
         <apexchart class="w-full h-55" type="bar" :options="chartOptions" :series="chartData"></apexchart>
     </div>

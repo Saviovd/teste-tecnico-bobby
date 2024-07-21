@@ -1,5 +1,5 @@
 <template>
-    <div class="p-6 bg-gray-900 text-white rounded mt-16">
+    <div class="p-6 bg-gray-900 text-white rounded mt-20 ml-3 mr-3 sm:ml-6 sm:mr-6 md:ml-0" >
         <h1 class="text-3xl font-bold mb-4">Sobre o Projeto</h1>
         <p class="mb-4">
             Este projeto é uma mini-aplicação desenvolvida para o controle de usuários, permitindo uma gestão eficiente

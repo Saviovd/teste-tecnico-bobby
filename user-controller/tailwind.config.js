@@ -1,9 +1,13 @@
 module.exports = {
   content: [
-    './src/**/*.{html,js,vue, css}',
+    './src/**/*.{html,js,vue,css}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        'x12': '1250px',
+      },
+    },
   },
   plugins: [],
 };
