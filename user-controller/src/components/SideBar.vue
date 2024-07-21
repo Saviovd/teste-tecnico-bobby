@@ -9,7 +9,7 @@
         </SidebarButton>
 
         <aside :class="{ 'sidebar-open': isSidebarOpen || isDesktop, 'sidebar-closed': !isSidebarOpen && !isDesktop }"
-            class="sidebar bg-gray-900 p-4 fixed top-0 left-0 h-full shadow-md transition-transform duration-300 ease-in-out">
+            class="sidebar bg-gray-900 p-4 pr-0 fixed top-0 left-0 h-full shadow-md transition-transform duration-300 ease-in-out">
             <SidebarButton v-if="isSidebarOpen && !isDesktop" @toggleSidebar="toggleSidebar"
                 :isSidebarAnimating="isSidebarAnimating" position="right">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
@@ -33,6 +33,10 @@ import UserInfo from './UserInfo.vue';
 import SidebarNavigation from './SidebarNavigation.vue';
 import LogoutButton from './LogoutButton.vue';
 
+import HomeIcon from '@/assets/icons/HomeIcon.vue';
+import UsersIcon from '@/assets/icons/UsersIcon.vue';
+import AboutIcon from '@/assets/icons/AboutIcon.vue';
+
 export default {
     name: "SideBar",
     components: {
@@ -48,9 +52,9 @@ export default {
             isDesktop: window.innerWidth >= 768,
             isSidebarAnimating: false,
             navLinks: [
-                { name: 'Home', path: '/' },
-                { name: 'Users', path: '/users' },
-                { name: 'About', path: '/about' }
+                { name: 'Home', path: '/', icon: HomeIcon },
+                { name: 'Users', path: '/users', icon: UsersIcon },
+                { name: 'About', path: '/about', icon: AboutIcon }
             ]
         };
     },
