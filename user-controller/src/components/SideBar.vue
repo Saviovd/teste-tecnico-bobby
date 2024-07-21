@@ -61,6 +61,7 @@ export default {
     created() {
         this.userFromLocalStorage();
         window.addEventListener('resize', this.handleResize);
+        this.watchRouteChanges();
     },
     unmounted() {
         window.removeEventListener('resize', this.handleResize);
@@ -93,6 +94,18 @@ export default {
             localStorage.removeItem('user');
             localStorage.removeItem('authToken');
             window.location.reload();
+        },
+        watchRouteChanges() {
+            const router = this.$router;
+
+            this.$watch(
+                () => router.currentRoute.value.path,
+                () => {
+                    if (window.innerWidth < 768) {
+                        this.isSidebarOpen = false;
+                    }
+                }
+            );
         }
     }
 };
@@ -112,7 +125,6 @@ export default {
 }
 
 .sidebar-closed {
-
     transform: translateX(-100%);
 }
 

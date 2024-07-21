@@ -25,7 +25,7 @@ export default {
 .nav-link {
     display: flex;
     align-items: center;
-    transform: translateX(-4px);
+    transform: translateX(-1px);
 }
 
 .nav-link:hover .icon {
@@ -35,7 +35,7 @@ export default {
 .active-link {
     color: #d1d5db;
     background-color: #1f2937;
-    transform: translateX(4px);
+    transform: translateX(1px);
     transition: 0.5s;
 }
 
