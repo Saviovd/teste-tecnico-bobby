@@ -85,4 +85,28 @@ button.relative {
   font-size: 12px;
   font-weight: bold;
 }
+
+.overflow-container {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  padding: 1rem;
+}
+
+.overflow-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.overflow-container::-webkit-scrollbar-track {
+  background: #2d2d2d;
+}
+
+.overflow-container::-webkit-scrollbar-thumb {
+  background: #6366f1;
+  border-radius: 4px;
+}
+
+.overflow-container::-webkit-scrollbar-thumb:hover {
+  background: #4f46e5;
+}
 </style>

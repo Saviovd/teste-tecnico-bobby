@@ -1,7 +1,7 @@
 <template>
     <transition name="fade">
         <div v-if="showNotifications"
-            class="absolute top-16 right-4 bg-gray-500 text-white p-4 rounded-lg shadow-lg w-80">
+            class="fixed top-16 right-4 bg-gray-500 text-white p-4 rounded-lg shadow-lg w-80">
             <h4 class="text-lg font-semibold mb-2">Mensagens e Alertas</h4>
             <div class="space-y-4">
                 <div v-for="(notification, index) in notifications" :key="index"
