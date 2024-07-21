@@ -1,6 +1,6 @@
 <template>
     <button @click="onClick" :class="buttonClass"
-        class="p-4 text-white bg-gray-800 z-50 transition-transform duration-300 ease-in-out">
+        class="p-4 text-white bg-gray-700 z-50 transition-transform duration-300 ease-in-out hover:bg-gray-500">
         <slot></slot>
     </button>
 </template>

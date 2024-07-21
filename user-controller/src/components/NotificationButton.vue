@@ -1,5 +1,5 @@
 <template>
-    <button @click="handleClick" class="sticky top-4 right-4 p-2 bg-indigo-600 rounded-full shadow-lg">
+    <button @click="handleClick" class="fixed top-4 right-4 p-2 bg-indigo-600 rounded-full shadow-lg">
         <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" version="1.1" class="h-6 w-6 fill-gray-100" id="Capa_1"
             viewBox="0 0 611.999 611.999">
             <path
@@ -27,7 +27,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .notification-count {
     position: absolute;
     top: -8px;
