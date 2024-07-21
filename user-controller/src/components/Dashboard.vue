@@ -7,9 +7,6 @@
       <KpiCard title="Tickets Resolvidos" value="789"
         description="Número de tickets de suporte resolvidos no último mês." />
     </div>
-
-    <Feedbacks :users="users" />
-
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 x12:grid-cols-3 gap-6 mt-6">
       <div class="w-full">
         <NewUsersChart class="w-full h-full" />
@@ -21,6 +18,7 @@
         <ActiveInactiveChart class="w-full h-full" />
       </div>
     </div>
+    <Feedbacks :users="users" />
   </div>
 </template>
 

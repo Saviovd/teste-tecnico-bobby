@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-center bg-gradient-to-r from-gray-800 to-indigo-900 p-4">
+  <div class="flex items-center min-h-screen justify-center bg-gradient-to-r from-gray-800 to-indigo-900 p-4">
     <div class="bg-gray-900 p-8 rounded-lg shadow-lg w-full max-w-md">
       <h2 class="text-2xl font-bold mb-6 text-white">Login</h2>
       <form @submit.prevent="login" class="space-y-4">
@@ -31,7 +31,7 @@
         </button>
       </form>
       <p class="mt-6 text-white text-sm">
-        Para testar o login, use qualquer qualquer senha. Você pode buscar um email de usuário na 
+        Para testar o login, use qualquer senha. Você pode buscar um email de usuário na 
         <a href="https://reqres.in/api/users?page=1" target="_blank" class="text-indigo-400 hover:underline">API Reqres</a>.
       </p>
     </div>

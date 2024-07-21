@@ -5,7 +5,7 @@
                 <router-link :to="link.path"
                     class="nav-link text-indigo-400 pt-2 text-2xl tracking-wider justify-center hover:text-zinc-300 flex items-center w-full"
                     active-class="active-link">
-                    <component :is="link.icon" class="icon w-6 h-6" />
+                    <component :is="link.icon" class="icon w-7 h-7" />
                     {{ link.name }}
                 </router-link>
             </li>
