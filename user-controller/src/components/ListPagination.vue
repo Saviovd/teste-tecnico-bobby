@@ -1,9 +1,9 @@
 <template>
-  <div class="flex items-center justify-center space-x-2 mt-4">
+  <div class="flex flex-wrap items-center justify-center space-x-2 mt-4">
     <button
       @click="$emit('change-page', currentPage - 1)"
       :disabled="currentPage === 1"
-      class="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:bg-gray-500 transition duration-300"
+      class="px-3 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:bg-gray-500 transition duration-300 text-sm md:text-base"
     >
       Previous
     </button>
@@ -13,7 +13,7 @@
       :key="page"
       @click="$emit('change-page', page)"
       :class="[
-        'px-4 py-2 rounded-lg text-white',
+        'px-3 py-2 rounded-lg text-white text-sm md:text-base',
         page === currentPage
           ? 'bg-blue-600 font-semibold'
           : 'bg-gray-700 hover:bg-gray-600'
@@ -25,7 +25,7 @@
     <button
       @click="$emit('change-page', currentPage + 1)"
       :disabled="currentPage >= totalPages"
-      class="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:bg-gray-500 transition duration-300"
+      class="px-3 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:bg-gray-500 transition duration-300 text-sm md:text-base"
     >
       Next
     </button>

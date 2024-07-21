@@ -1,6 +1,10 @@
 <template>
-  <div class="bg-gray-800 p-4 rounded-lg shadow-lg flex items-center space-x-4">
-    <img class="w-24 h-24 rounded-full border-2 border-gray-700" :src="user.avatar" :alt="user.first_name">
+  <div class="bg-gray-800 p-4 rounded-lg shadow-lg flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
+    <img
+      class="w-24 h-24 rounded-full border-2 border-gray-700 mb-4 sm:mb-0"
+      :src="user.avatar"
+      :alt="user.first_name"
+    />
 
     <div class="flex-1">
       <h3 v-if="!isEditing" class="text-xl font-semibold text-white">{{ user.first_name }} {{ user.last_name }}</h3>
@@ -36,7 +40,7 @@
 
       <p v-if="!isEditing" class="text-gray-400">{{ user.email }}</p>
 
-      <div class="mt-4 flex space-x-2">
+      <div class="mt-4 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
         <button
           @click="toggleEdit"
           class="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700 transition duration-300"

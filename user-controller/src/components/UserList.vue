@@ -1,7 +1,7 @@
 <template>
   <div class="p-6 relative bg-gray-900 rounded">
-    <div class="flex mb-2 items-center gap-x-1.5">
-      <h1 class="text-2xl text-white font-thin">Search for any user</h1>
+    <div class="flex mb-2 justify-center items-center gap-x-1.5 sm:justify-start">
+      <h1 class="text-2xl text-white font-thin mb-2 sm:text-3xl">Search for any user</h1>
       <svg class="w-6 h-6 fill-indigo-500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         version="1.1" id="Capa_1" viewBox="0 0 488.4 488.4" xml:space="preserve">
         <g>
@@ -11,9 +11,10 @@
       </svg>
     </div>
     <input v-model="searchQuery" type="text" placeholder="Buscar por nome ou email" @input="applyFilter"
-      class="mb-6 p-3 border border-gray-700 rounded bg-gray-800 text-white placeholder-gray-400 w-1/3" />
+      class="mb-4 p-3 border border-gray-700 rounded bg-gray-800 text-white placeholder-gray-400 w-full mt-10 h-10 sm:mt-0 sm:h-12 sm:w-2/3 md:w-1/2 lg:w-1/3" />
     <button @click="showModal = true"
-      class="absolute right-6 mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+      class="absolute right-6 mt-0 bg-blue-600 text-white py-1.5 px-2 rounded-lg hover:bg-blue-700 focus:outline-none sm:mt-2 sm:text-md sm:py-1.5 sm:px-2.5 focus:ring-2 focus:ring-blue-500
+      text-sm sm:text-sm md:text-lg lg:text-xl">
       Criar Usuário
     </button>
     <ul class="space-y-4">
@@ -100,3 +101,30 @@ export default {
   },
 };
 </script>
+<style>
+@media (max-width: 500px) {
+  .bg-gray-900 {
+    padding: 1.5rem;
+  }
+  
+  .text-2xl {
+    font-size: 1.5rem;
+  }
+  
+  .text-sm {
+    font-size: 0.875rem;
+  }
+  
+  .mt-6 {
+    margin-top: 1.5rem;
+  }
+  
+  .mb-2 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .mb-4 {
+    margin-bottom: 1rem;
+  }
+}
+</style>
