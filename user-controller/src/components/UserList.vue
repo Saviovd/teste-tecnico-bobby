@@ -20,7 +20,7 @@
     </div>
     <ul class="space-y-4">
       <li v-for="user in paginatedUsers" :key="user.id" class="bg-gray-800 p-4 rounded-lg shadow-lg">
-        <UserCard :user="user" />
+        <UserCard :user="user" @deleted="handleDeleteUser" />
       </li>
     </ul>
 
@@ -92,6 +92,14 @@ export default {
 
     changePage(page) {
       this.$store.commit("SET_CURRENT_PAGE", page);
+    },
+
+    handleDeleteUser(userId) {
+      this.filteredUsers = this.filteredUsers.filter(user => user.id !== userId);
+    },
+
+    updateUser(updatedUser) {
+      this.$store.dispatch('editUser', updatedUser);
     },
   },
   watch: {

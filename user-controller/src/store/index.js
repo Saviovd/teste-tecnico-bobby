@@ -28,6 +28,9 @@ const store = createStore({
         },
         DELETE_USER(state, userId) {
             state.users = state.users.filter((user) => user.id !== userId);
+            const totalPages = Math.ceil(state.users.length / 4);
+            state.totalPages = totalPages;
+            state.currentPage = Math.min(state.currentPage, totalPages);
         },
     },
     actions: {

@@ -26,12 +26,12 @@
 
       <p v-if="!isEditing" class="text-gray-400">{{ user.email }}</p>
 
-      <div class="mt-4 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+      <div class="mt-4 flex justify-end flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
         <button @click="toggleEdit"
           class="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700 transition duration-300">
           {{ isEditing ? "Salvar" : "Editar" }}
         </button>
-        <button v-if="!isEditing" @click="deleteUser"
+        <button v-if="!isEditing" @click="showConfirmationModal = true"
           class="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition duration-300">
           Excluir
         </button>
@@ -40,17 +40,25 @@
           Cancelar
         </button>
       </div>
-      <p v-if="successMessage" class="text-green-500 text-sm mt-4">{{ successMessage }}</p>
     </div>
+
+    <ConfirmationModal :visible="showConfirmationModal"
+      message="Você tem certeza que deseja excluir este usuário?" @confirm="deleteUser"
+      @cancel="showConfirmationModal = false" />
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
-import UserService from "../services/UserService";
-import { validateInput } from "../utils/validateForms.js";
+import { ref } from 'vue';
+import { useToast } from 'vue-toastification';
+import UserService from '../services/UserService';
+import { validateInput } from '../utils/validateForms.js';
+import ConfirmationModal from './ConfirmationModal.vue';
 
 export default {
+  components: {
+    ConfirmationModal,
+  },
   props: {
     user: {
       type: Object,
@@ -61,7 +69,8 @@ export default {
     const isEditing = ref(false);
     const editableUser = ref({ ...props.user });
     const validationErrors = ref({});
-    const successMessage = ref("");
+    const toast = useToast();
+    const showConfirmationModal = ref(false);
 
     const validateField = (field, value) => {
       const type = {
@@ -70,10 +79,6 @@ export default {
         email: "email",
       }[field];
       validationErrors.value[field] = validateInput(value, type);
-    };
-
-    const clearSuccessMessage = () => {
-      successMessage.value = "";
     };
 
     const toggleEdit = async () => {
@@ -88,11 +93,11 @@ export default {
 
         try {
           await UserService.editUser(editableUser.value);
-          emit("updated", editableUser.value);
-          successMessage.value = "Usuário atualizado com sucesso!";
-          setTimeout(clearSuccessMessage, 5000);
+          emit('updated', editableUser.value);
+          toast.success("Usuário atualizado com sucesso!");
         } catch (error) {
           console.error("Erro ao editar usuário:", error);
+          toast.error("Erro ao editar usuário.");
         }
       }
       isEditing.value = !isEditing.value;
@@ -101,21 +106,22 @@ export default {
     const deleteUser = async () => {
       try {
         await UserService.deleteUser(props.user.id);
-        emit("deleted", props.user.id);
-        successMessage.value = "Usuário excluído com sucesso!";
-        setTimeout(clearSuccessMessage, 5000);
+        emit('deleted', props.user.id);
+        toast.success("Usuário excluído com sucesso!");
       } catch (error) {
         console.error("Erro ao excluir usuário:", error);
+        toast.error("Erro ao excluir usuário.");
       }
+      showConfirmationModal.value = false;
     };
 
     return {
       isEditing,
       editableUser,
       validationErrors,
-      successMessage,
+      toast,
+      showConfirmationModal,
       validateField,
-      clearSuccessMessage,
       toggleEdit,
       deleteUser,
     };
