@@ -11,18 +11,18 @@
       <div v-if="isEditing">
         <input type="text" v-model="editableUser.first_name" placeholder="First Name"
           @blur="validateField('first_name', editableUser.first_name)"
-          class="w-full mb-2 p-2 border border-gray-600 rounded bg-gray-900 text-white placeholder-gray-400" />
+          :class="['w-full mb-2 p-2 rounded bg-gray-900 text-white placeholder-gray-400', validationErrors.first_name ? 'border-red-500 placeholder-red-400 border' : 'border-gray-600 border']" />
         <span v-if="validationErrors.first_name" class="text-red-500 text-sm">{{ validationErrors.first_name }}</span>
 
         <input type="text" v-model="editableUser.last_name" placeholder="Last Name"
           @blur="validateField('last_name', editableUser.last_name)"
-          class="w-full mb-2 p-2 border border-gray-600 rounded bg-gray-900 text-white placeholder-gray-400" />
+          :class="['w-full mb-2 p-2 rounded bg-gray-900 text-white placeholder-gray-400', validationErrors.last_name ? 'border-red-500 placeholder-red-400 border' : 'border-gray-600 border']" />
         <span v-if="validationErrors.last_name" class="text-red-500 text-sm">{{ validationErrors.last_name }}</span>
 
         <input type="email" v-model="editableUser.email" placeholder="Email"
           @blur="validateField('email', editableUser.email)"
-          class="w-full mb-2 p-2 border border-gray-600 rounded bg-gray-900 text-white placeholder-gray-400" />
-        <span v-if="validationErrors.email" class="text-red-500 text-sm">{{ validationErrors.email }}</span>
+          :class="['w-full mb-2 p-2 rounded bg-gray-900 text-white placeholder-gray-400', validationErrors.email ? 'border-red-500 placeholder-red-400 border' : 'border-gray-600 border']" />
+        <span v-if="validationErrors.email" class="text-red-500 text-sm ">{{ validationErrors.email }}</span>
       </div>
 
       <p v-if="!isEditing" class="text-gray-400">{{ editableUser.email }}</p>

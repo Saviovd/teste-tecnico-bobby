@@ -6,8 +6,10 @@
         <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Nome:</label>
         <input type="text" id="name" v-model="user.name" @blur="validateField('name', user.name)"
           @input="clearSuccessMessage"
-          class="w-full p-2 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Digite o nome" />
+          :class="['w-full p-2 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500',
+            validationErrors.name ? 'border-red-500 placeholder-red-400 border' : 'border-gray-600 border']"
+          placeholder="Digite o nome"
+          :style="{ color: validationErrors.name ? 'red' : 'inherit' }" />
         <p v-if="validationErrors.name" class="text-red-500 text-sm mt-1">{{ validationErrors.name }}</p>
       </div>
 
@@ -15,8 +17,10 @@
         <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email:</label>
         <input type="email" id="email" v-model="user.email" @blur="validateField('email', user.email)"
           @input="clearSuccessMessage"
-          class="w-full p-2 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Digite o email" />
+          :class="['w-full p-2 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500',
+            validationErrors.email ? 'border-red-500 border placeholder-red-400' : 'border-gray-600 border']"
+          placeholder="Digite o email"
+          :style="{ color: validationErrors.email ? 'red' : 'inherit' }" />
         <p v-if="validationErrors.email" class="text-red-500 text-sm mt-1">{{ validationErrors.email }}</p>
       </div>
 
@@ -78,11 +82,16 @@ export default {
       }
     };
 
+    const clearSuccessMessage = () => {
+      validationErrors.value = {};
+    };
+
     return {
       user,
       validationErrors,
       validateField,
       submitForm,
+      clearSuccessMessage,
     };
   },
 };

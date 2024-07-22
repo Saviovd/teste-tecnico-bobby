@@ -7,10 +7,11 @@
           <input
             v-model="email"
             type="email"
-            placeholder="Email"
+            placeholder="E-mail"
             @blur="validateField('email', email)"
-            class="w-full p-3 border border-gray-700 rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:border-indigo-500"
-          />
+            :class="['w-full p-3 rounded bg-gray-800 text-blue-100 placeholder-gray-400 focus:outline-none',
+              validationErrors.email ? 'border-red-500 placeholder-red-400 border' : 'border-gray-700 border']" 
+            />
           <p v-if="validationErrors.email" class="text-red-400 text-sm mt-1">{{ validationErrors.email }}</p>
         </div>
         <div>
@@ -19,8 +20,9 @@
             type="password"
             placeholder="Senha"
             @blur="validateField('password', password)"
-            class="w-full p-3 border border-gray-700 rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:border-indigo-500"
-          />
+            :class="['w-full p-3 rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none',
+              validationErrors.password ? 'border-red-500 placeholder-red-400 border' : 'border-gray-700 border']"
+            />
           <p v-if="validationErrors.password" class="text-red-400 text-sm mt-1">{{ validationErrors.password }}</p>
         </div>
         <button
