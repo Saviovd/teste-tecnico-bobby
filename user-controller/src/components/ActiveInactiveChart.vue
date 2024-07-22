@@ -1,6 +1,6 @@
 <template>
-    <div class="w-full bg-gray-700 p-4 pb-1 rounded-sm shadow-lg">
-        <h3 class="text-xl mb-2 text-indigo-500">Usuários Ativos vs. Inativos</h3>
+    <div class="w-full bg-gray-700 p-4 pb-1 rounded-lg shadow-lg">
+        <h3 class="text-xl mb-2 text-neutral-200">Usuários Ativos vs. Inativos</h3>
         <apexchart class="w-full h-55" type="pie" :options="chartOptions" :series="chartData"></apexchart>
     </div>
 </template>

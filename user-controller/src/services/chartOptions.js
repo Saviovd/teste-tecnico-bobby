@@ -50,12 +50,12 @@ export const ageDistributionChartOptions = {
         type: 'bar',
         height: '100%',
         toolbar: {
-            show: true,
+            show: false,
         },
         foreColor: '#c7d2fe',
     },
     xaxis: {
-        categories: ['10-19', '20-29', '30-39', '40-49', '50-59', '60-69'],
+        categories: ['18-29', '30-39', '40-49', '50-59', '60-69'],
         labels: {
             style: {
                 colors: '#c7d2fe',

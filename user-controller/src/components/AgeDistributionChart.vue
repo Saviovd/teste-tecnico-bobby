@@ -1,6 +1,6 @@
 <template>
-    <div class="w-full bg-gray-700 p-4 pb-0 rounded-sm shadow-lg">
-        <h3 class="text-xl mb-2 text-indigo-500">Distribuição por Idade</h3>
+    <div class="w-full bg-gray-700 p-4 pb-0 rounded-lg shadow-lg">
+        <h3 class="text-xl mb-2 text-neutral-200">Distribuição por Idade</h3>
         <apexchart class="w-full h-55" type="bar" :options="chartOptions" :series="chartData"></apexchart>
     </div>
 </template>
@@ -20,7 +20,7 @@ export default {
         const chartData = ref([
             {
                 name: 'Usuários',
-                data: [10, 30, 40, 20, 10, 5],
+                data: [30, 40, 20, 10, 5],
             },
         ]);
 
