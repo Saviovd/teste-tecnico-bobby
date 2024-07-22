@@ -20,8 +20,9 @@
     </div>
     <ul class="space-y-4">
       <li v-for="user in paginatedUsers" :key="user.id" class="bg-gray-800 p-4 rounded-lg shadow-lg">
-        <UserCard :user="user" @deleted="handleDeleteUser" />
+        <UserCard :user="user" @deleted="handleDeleteUser" @updated="updateUser"/>
       </li>
+      <p v-if="paginatedUsers.length < 1" class="text-lg font-medium mt-4 mb-4">Nenhum usuário foi encontrado</p>
     </ul>
 
     <Pagination :totalPages="totalPages" :currentPage="currentPage" @change-page="changePage" class="mt-6" />
@@ -100,6 +101,7 @@ export default {
 
     updateUser(updatedUser) {
       this.$store.dispatch('editUser', updatedUser);
+      this.applyFilter(this.searchQuery);
     },
   },
   watch: {

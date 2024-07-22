@@ -1,11 +1,12 @@
 <template>
   <div
     class="bg-gray-800 p-4 rounded-lg shadow-lg flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
-    <img class="w-24 h-24 rounded-full border-2 border-gray-700 mb-4 sm:mb-0" :src="user.avatar"
-      :alt="user.first_name" />
+    <img class="w-24 h-24 rounded-full border-2 border-gray-700 mb-4 sm:mb-0" :src="editableUser.avatar"
+      :alt="editableUser.first_name" />
 
     <div class="flex-1">
-      <h3 v-if="!isEditing" class="text-xl font-semibold text-white">{{ user.first_name }} {{ user.last_name }}</h3>
+      <h3 v-if="!isEditing" class="text-xl font-semibold text-white">{{ editableUser.first_name }} {{
+        editableUser.last_name }}</h3>
 
       <div v-if="isEditing">
         <input type="text" v-model="editableUser.first_name" placeholder="First Name"
@@ -24,7 +25,7 @@
         <span v-if="validationErrors.email" class="text-red-500 text-sm">{{ validationErrors.email }}</span>
       </div>
 
-      <p v-if="!isEditing" class="text-gray-400">{{ user.email }}</p>
+      <p v-if="!isEditing" class="text-gray-400">{{ editableUser.email }}</p>
 
       <div class="mt-4 flex justify-end flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
         <button @click="toggleEdit"
@@ -35,7 +36,7 @@
           class="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition duration-300">
           Excluir
         </button>
-        <button v-else @click="isEditing = false"
+        <button v-else @click="cancelEdit"
           class="bg-gray-600 text-white py-2 px-4 rounded hover:bg-gray-700 transition duration-300">
           Cancelar
         </button>
@@ -49,7 +50,7 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useToast } from 'vue-toastification';
 import UserService from '../services/UserService';
 import { validateInput } from '../utils/validateForms.js';
@@ -71,6 +72,10 @@ export default {
     const validationErrors = ref({});
     const toast = useToast();
     const showConfirmationModal = ref(false);
+
+    watch(() => props.user, (newUser) => {
+      editableUser.value = { ...newUser };
+    });
 
     const validateField = (field, value) => {
       const type = {
@@ -103,6 +108,11 @@ export default {
       isEditing.value = !isEditing.value;
     };
 
+    const cancelEdit = () => {
+      editableUser.value = { ...props.user };
+      isEditing.value = false;
+    };
+
     const deleteUser = async () => {
       try {
         await UserService.deleteUser(props.user.id);
@@ -123,6 +133,7 @@ export default {
       showConfirmationModal,
       validateField,
       toggleEdit,
+      cancelEdit,
       deleteUser,
     };
   },
