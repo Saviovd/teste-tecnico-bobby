@@ -25,12 +25,12 @@
         Enviar
       </button>
     </form>
-    <p v-if="successMessage" class="text-green-500 text-md mt-4 text-center">{{ successMessage }}</p>
   </div>
 </template>
 
 <script>
 import { ref } from "vue";
+import { useToast } from 'vue-toastification';
 import UserService from "../services/UserService";
 import { validateInput } from "../utils/validateForms.js";
 
@@ -41,7 +41,7 @@ export default {
   setup(props) {
     const user = ref(props.userData || { name: "", email: "" });
     const validationErrors = ref({});
-    const successMessage = ref("");
+    const toast = useToast();
 
     const validateField = (field, value) => {
       const type = {
@@ -54,10 +54,6 @@ export default {
     const validateForm = () => {
       validationErrors.value.name = validateInput(user.value.name, "text");
       validationErrors.value.email = validateInput(user.value.email, "email");
-    };
-
-    const clearSuccessMessage = () => {
-      successMessage.value = "";
     };
 
     const submitForm = async () => {
@@ -73,12 +69,12 @@ export default {
 
       try {
         await UserService.createUser(user.value);
-        successMessage.value = "Usuário cadastrado com sucesso!";
+        toast.success("Usuário cadastrado com sucesso!");
         user.value = { name: "", email: "" };
         validationErrors.value = {};
-        setTimeout(clearSuccessMessage, 5000);
       } catch (error) {
         console.error("Erro ao salvar usuário:", error);
+        toast.error("Erro ao cadastrar usuário.");
       }
     };
 
@@ -87,8 +83,6 @@ export default {
       validationErrors,
       validateField,
       submitForm,
-      successMessage,
-      clearSuccessMessage,
     };
   },
 };
