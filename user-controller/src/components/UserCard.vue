@@ -1,67 +1,46 @@
 <template>
-  <div class="bg-gray-800 p-4 rounded-lg shadow-lg flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
-    <img
-      class="w-24 h-24 rounded-full border-2 border-gray-700 mb-4 sm:mb-0"
-      :src="user.avatar"
-      :alt="user.first_name"
-    />
+  <div
+    class="bg-gray-800 p-4 rounded-lg shadow-lg flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
+    <img class="w-24 h-24 rounded-full border-2 border-gray-700 mb-4 sm:mb-0" :src="user.avatar"
+      :alt="user.first_name" />
 
     <div class="flex-1">
       <h3 v-if="!isEditing" class="text-xl font-semibold text-white">{{ user.first_name }} {{ user.last_name }}</h3>
 
       <div v-if="isEditing">
-        <input
-          type="text"
-          v-model="editableUser.first_name"
-          placeholder="First Name"
+        <input type="text" v-model="editableUser.first_name" placeholder="First Name"
           @blur="validateField('first_name', editableUser.first_name)"
-          class="w-full mb-2 p-2 border border-gray-600 rounded bg-gray-900 text-white placeholder-gray-400"
-        />
+          class="w-full mb-2 p-2 border border-gray-600 rounded bg-gray-900 text-white placeholder-gray-400" />
         <span v-if="validationErrors.first_name" class="text-red-500 text-sm">{{ validationErrors.first_name }}</span>
 
-        <input
-          type="text"
-          v-model="editableUser.last_name"
-          placeholder="Last Name"
+        <input type="text" v-model="editableUser.last_name" placeholder="Last Name"
           @blur="validateField('last_name', editableUser.last_name)"
-          class="w-full mb-2 p-2 border border-gray-600 rounded bg-gray-900 text-white placeholder-gray-400"
-        />
+          class="w-full mb-2 p-2 border border-gray-600 rounded bg-gray-900 text-white placeholder-gray-400" />
         <span v-if="validationErrors.last_name" class="text-red-500 text-sm">{{ validationErrors.last_name }}</span>
 
-        <input
-          type="email"
-          v-model="editableUser.email"
-          placeholder="Email"
+        <input type="email" v-model="editableUser.email" placeholder="Email"
           @blur="validateField('email', editableUser.email)"
-          class="w-full mb-2 p-2 border border-gray-600 rounded bg-gray-900 text-white placeholder-gray-400"
-        />
+          class="w-full mb-2 p-2 border border-gray-600 rounded bg-gray-900 text-white placeholder-gray-400" />
         <span v-if="validationErrors.email" class="text-red-500 text-sm">{{ validationErrors.email }}</span>
       </div>
 
       <p v-if="!isEditing" class="text-gray-400">{{ user.email }}</p>
 
       <div class="mt-4 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
-        <button
-          @click="toggleEdit"
-          class="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700 transition duration-300"
-        >
+        <button @click="toggleEdit"
+          class="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700 transition duration-300">
           {{ isEditing ? "Salvar" : "Editar" }}
         </button>
-        <button
-          v-if="!isEditing"
-          @click="deleteUser"
-          class="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition duration-300"
-        >
+        <button v-if="!isEditing" @click="deleteUser"
+          class="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition duration-300">
           Excluir
         </button>
-        <button
-          v-else
-          @click="isEditing = false"
-          class="bg-gray-600 text-white py-2 px-4 rounded hover:bg-gray-700 transition duration-300"
-        >
+        <button v-else @click="isEditing = false"
+          class="bg-gray-600 text-white py-2 px-4 rounded hover:bg-gray-700 transition duration-300">
           Cancelar
         </button>
       </div>
+      <p v-if="successMessage" class="text-green-500 text-sm mt-4">{{ successMessage }}</p>
     </div>
   </div>
 </template>
@@ -82,6 +61,7 @@ export default {
     const isEditing = ref(false);
     const editableUser = ref({ ...props.user });
     const validationErrors = ref({});
+    const successMessage = ref("");
 
     const validateField = (field, value) => {
       const type = {
@@ -92,19 +72,25 @@ export default {
       validationErrors.value[field] = validateInput(value, type);
     };
 
+    const clearSuccessMessage = () => {
+      successMessage.value = "";
+    };
+
     const toggleEdit = async () => {
       if (isEditing.value) {
         validateField('first_name', editableUser.value.first_name);
         validateField('last_name', editableUser.value.last_name);
         validateField('email', editableUser.value.email);
-        
+
         if (Object.keys(validationErrors.value).some(key => validationErrors.value[key])) {
           return;
         }
-        
+
         try {
           await UserService.editUser(editableUser.value);
           emit("updated", editableUser.value);
+          successMessage.value = "Usuário atualizado com sucesso!";
+          setTimeout(clearSuccessMessage, 5000);
         } catch (error) {
           console.error("Erro ao editar usuário:", error);
         }
@@ -116,6 +102,8 @@ export default {
       try {
         await UserService.deleteUser(props.user.id);
         emit("deleted", props.user.id);
+        successMessage.value = "Usuário excluído com sucesso!";
+        setTimeout(clearSuccessMessage, 5000);
       } catch (error) {
         console.error("Erro ao excluir usuário:", error);
       }
@@ -125,7 +113,9 @@ export default {
       isEditing,
       editableUser,
       validationErrors,
+      successMessage,
       validateField,
+      clearSuccessMessage,
       toggleEdit,
       deleteUser,
     };

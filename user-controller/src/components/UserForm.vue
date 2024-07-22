@@ -5,6 +5,7 @@
       <div class="mb-4">
         <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Nome:</label>
         <input type="text" id="name" v-model="user.name" @blur="validateField('name', user.name)"
+          @input="clearSuccessMessage"
           class="w-full p-2 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Digite o nome" />
         <p v-if="validationErrors.name" class="text-red-500 text-sm mt-1">{{ validationErrors.name }}</p>
@@ -13,6 +14,7 @@
       <div class="mb-4">
         <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email:</label>
         <input type="email" id="email" v-model="user.email" @blur="validateField('email', user.email)"
+          @input="clearSuccessMessage"
           class="w-full p-2 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Digite o email" />
         <p v-if="validationErrors.email" class="text-red-500 text-sm mt-1">{{ validationErrors.email }}</p>
@@ -23,6 +25,7 @@
         Enviar
       </button>
     </form>
+    <p v-if="successMessage" class="text-green-500 text-md mt-4 text-center">{{ successMessage }}</p>
   </div>
 </template>
 
@@ -38,6 +41,7 @@ export default {
   setup(props) {
     const user = ref(props.userData || { name: "", email: "" });
     const validationErrors = ref({});
+    const successMessage = ref("");
 
     const validateField = (field, value) => {
       const type = {
@@ -50,6 +54,10 @@ export default {
     const validateForm = () => {
       validationErrors.value.name = validateInput(user.value.name, "text");
       validationErrors.value.email = validateInput(user.value.email, "email");
+    };
+
+    const clearSuccessMessage = () => {
+      successMessage.value = "";
     };
 
     const submitForm = async () => {
@@ -65,6 +73,10 @@ export default {
 
       try {
         await UserService.createUser(user.value);
+        successMessage.value = "Usuário cadastrado com sucesso!";
+        user.value = { name: "", email: "" };
+        validationErrors.value = {};
+        setTimeout(clearSuccessMessage, 5000);
       } catch (error) {
         console.error("Erro ao salvar usuário:", error);
       }
@@ -75,6 +87,8 @@ export default {
       validationErrors,
       validateField,
       submitForm,
+      successMessage,
+      clearSuccessMessage,
     };
   },
 };
