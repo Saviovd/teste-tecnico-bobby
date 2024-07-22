@@ -1,10 +1,12 @@
 export function applyFilter(users, query) {
+    if(query === undefined) return
     const lowerQuery = query.toLowerCase();
     return users
         .filter(user => {
-            const name = user.name || "";
+            const name = user.first_name || "";
+            const lastName = user.last_name || "";
             const email = user.email || "";
-            return name.toLowerCase().includes(lowerQuery) || email.toLowerCase().includes(lowerQuery);
+            return name.toLowerCase().includes(lowerQuery) || email.toLowerCase().includes(lowerQuery) || lastName.toLowerCase().includes(lowerQuery);
         });
 }
 
