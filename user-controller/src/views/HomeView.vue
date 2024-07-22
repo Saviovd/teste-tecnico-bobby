@@ -1,5 +1,5 @@
 <template>
-    <div class="p-3 w-full text-white relative text-center sm:p-6 mt-20">
+    <div class="p-3 w-full text-white relative text-center sm:p-6 mt-20 mb-7">
         <div v-if="user" class="mb-4 text-center text-lg text-indigo-200 sm:text-left sm:text-2xl">
             <strong class="tracking-wide text-indigo-500 text-2xl sm:text-4xl">
                 {{ user.first_name }}
