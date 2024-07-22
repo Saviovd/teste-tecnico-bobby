@@ -15,8 +15,7 @@ export default {
             const response = await apiClient.post(`/login`, userData);
             return response;
         } catch (error) {
-            console.error("API Error:", error);
-            throw error;
+            return
         }
     },
 }

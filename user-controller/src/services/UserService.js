@@ -46,8 +46,7 @@ export default {
       const response = await apiClient.get(`/users?page=${page}`);
       return response;
     } catch (error) {
-      console.error("API Error:", error);
-      throw error;
+      return
     }
   },
   createUser(user) {

@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { useToast } from 'vue-toastification';
 import AuthService from "../services/AuthService";
 import { setAuthToken } from "../utils/auth.js";
 import { validateInput } from "../utils/validateForms.js";
@@ -51,6 +52,10 @@ export default {
       password: "",
       validationErrors: {},
     };
+  },
+  setup() {
+    const toast = useToast();
+    return { toast };
   },
   methods: {
     validateField(field, value) {
@@ -88,7 +93,7 @@ export default {
         setAuthToken(token);
         this.$router.push("/");
       } catch (error) {
-        console.error("Erro ao fazer login:", error);
+        this.toast.error("O E-mail fornecido não é válido.");
       }
     },
   },
