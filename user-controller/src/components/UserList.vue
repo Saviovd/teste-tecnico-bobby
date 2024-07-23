@@ -114,27 +114,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-@media (max-width: 500px) {
-  .text-2xl {
-    font-size: 1.5rem;
-  }
-
-  .text-sm {
-    font-size: 0.875rem;
-  }
-
-  .mt-6 {
-    margin-top: 1.5rem;
-  }
-
-  .mb-2 {
-    margin-bottom: 0.5rem;
-  }
-
-  .mb-4 {
-    margin-bottom: 1rem;
-  }
-}
-</style>

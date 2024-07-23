@@ -6,7 +6,7 @@
                 class="flex items-center space-x-3 bg-gray-800 rounded-lg p-4">
                 <img class="w-12 h-12 rounded-full" :src="user.avatar" :alt="user.first_name">
                 <div>
-                    <p class="font-semibold text-left">{{ user.first_name }} {{ user.last_name }}</p>
+                    <p class="font-semibold text-left text-indigo-400">{{ user.first_name }} {{ user.last_name }}</p>
                     <p class="text-sm">{{ generateComment() }}</p>
                 </div>
             </div>

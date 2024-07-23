@@ -1,11 +1,11 @@
 <template>
   <div
     class="bg-gray-800 p-4 rounded-lg shadow-lg flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
-    <img class="w-24 h-24 rounded-full border-2 border-gray-700 mb-4 sm:mb-0" :src="editableUser.avatar"
+    <img class="w-24 h-24 rounded-full border-2 border-gray-700 mb-0" :src="editableUser.avatar"
       :alt="editableUser.first_name" />
 
     <div class="flex-1">
-      <h3 v-if="!isEditing" class="text-xl font-semibold text-white">{{ editableUser.first_name }} {{
+      <h3 v-if="!isEditing" class="text-xl font-semibold text-center mt-0 sm:text-left sm:mt-4 text-white">{{ editableUser.first_name }} {{
         editableUser.last_name }}</h3>
 
       <div v-if="isEditing">
@@ -27,17 +27,17 @@
 
       <p v-if="!isEditing" class="text-gray-400">{{ editableUser.email }}</p>
 
-      <div class="mt-4 flex justify-end flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+      <div class="flex justify-center items-center flex-row sm:justify-end mt-3 sm:mt-2 md:mt-5 lg:mt-0 space-y-2 space-y-0 space-x-2">
         <button @click="toggleEdit"
           class="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700 transition duration-300">
           {{ isEditing ? "Salvar" : "Editar" }}
         </button>
         <button v-if="!isEditing" @click="showConfirmationModal = true"
-          class="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition duration-300">
+          class="bg-red-600 text-white py-2 px-4 m-0 rounded hover:bg-red-700 transition duration-300">
           Excluir
         </button>
         <button v-else @click="cancelEdit"
-          class="bg-gray-600 text-white py-2 px-4 rounded hover:bg-gray-700 transition duration-300">
+          class="bg-gray-600 text-white m-0 py-2 px-4 rounded hover:bg-gray-700 transition duration-300">
           Cancelar
         </button>
       </div>

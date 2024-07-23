@@ -101,11 +101,11 @@ button.relative {
 }
 
 .overflow-container::-webkit-scrollbar {
-  width: 8px;
+  width: 3px;
 }
 
 .overflow-container::-webkit-scrollbar-track {
-  background: #2d2d2d;
+  background: transparent;
 }
 
 .overflow-container::-webkit-scrollbar-thumb {
