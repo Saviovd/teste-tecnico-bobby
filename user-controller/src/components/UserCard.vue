@@ -27,7 +27,7 @@
 
       <p v-if="!isEditing" class="text-gray-400">{{ editableUser.email }}</p>
 
-      <div class="flex justify-center items-center flex-row sm:justify-end mt-3 sm:mt-2 md:mt-5 lg:mt-0 space-y-2 space-y-0 space-x-2">
+      <div class="flex justify-center items-center flex-row sm:justify-end mt-3 sm:mt-2 md:mt-5 lg:mt-0 space-y-0 space-x-2">
         <button @click="toggleEdit"
           class="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700 transition duration-300">
           {{ isEditing ? "Salvar" : "Editar" }}
